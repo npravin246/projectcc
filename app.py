@@ -6,11 +6,13 @@ app = Flask(__name__)
 
 # Load trained custom model
 with open("credit_model.pkl", "rb") as f:
-    data = pickle.load(f)
+    model_data = pickle.load(f)
 
-weights = data["weights"]
-bias = data["bias"]
-scaler = data["scaler"]
+weights = model_data["weights"]
+bias = model_data["bias"]
+
+with open("scaler.pkl", "rb") as f:
+    scaler = pickle.load(f)
 
 # Helper functions (same as Colab)
 def sigmoid(z):
@@ -69,4 +71,5 @@ def predict():
         return render_template("index.html", prediction_text="Invalid Input ❌")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+
+    app.run()
